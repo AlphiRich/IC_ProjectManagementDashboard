@@ -1,0 +1,6 @@
+{
+  "name": "Innovation Consult PMO",
+  "description": "SaaS Project Management Office (PMO) Web Application for Innovation Consult (Pty) Ltd, styled in the corporate Navy, Burgundy, and Gold brand palette.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

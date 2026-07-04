@@ -1,0 +1,110 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "Strategic project delivery metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "department": { "type": "string" },
+        "manager": { "type": "string" },
+        "status": { "type": "string", "enum": ["On Track", "At Risk", "Critical", "Completed"] },
+        "budget": { "type": "number" },
+        "actualSpent": { "type": "number" },
+        "cpi": { "type": "number" },
+        "spi": { "type": "number" },
+        "velocity": { "type": "number" },
+        "progress": { "type": "number" },
+        "tasksTotal": { "type": "number" },
+        "tasksCompleted": { "type": "number" },
+        "description": { "type": "string" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "name", "status", "userId"]
+    },
+    "Sprint": {
+      "title": "Sprint",
+      "description": "Sprint milestones and points metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "projectId": { "type": "string" },
+        "status": { "type": "string", "enum": ["Planning", "Active", "Completed"] },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "targetPoints": { "type": "number" },
+        "completedPoints": { "type": "number" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "name", "projectId", "status", "userId"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Task items",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "title": { "type": "string" },
+        "assignee": { "type": "string" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "status": { "type": "string", "enum": ["To Do", "In Progress", "In Review", "Done"] },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "projectId", "title", "assignee", "priority", "status", "userId"]
+    },
+    "Resource": {
+      "title": "Resource",
+      "description": "Staffing resource information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "allocation": { "type": "number" },
+        "activeProjectsCount": { "type": "number" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "name", "role", "allocation", "userId"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Log of recent user actions for PMO transparency",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "action": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "action", "userId", "userEmail", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Portfolio projects list"
+    },
+    "/sprints/{sprintId}": {
+      "schema": "Sprint",
+      "description": "Sprints for projects"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Kanban board tasks"
+    },
+    "/resources/{resourceId}": {
+      "schema": "Resource",
+      "description": "Resources capacity list"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Immutable PMO Office Audit Logs"
+    }
+  }
+}
